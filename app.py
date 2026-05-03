@@ -14,7 +14,7 @@ app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 IMG_SIZE = (240, 240)
 
-model = load_model('models/best_model.keras')
+model = load_model('models/best_model.h5')
 
 
 def allowed_file(filename):
