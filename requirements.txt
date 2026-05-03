@@ -1,0 +1,5 @@
+flask
+werkzeug
+tensorflow-cpu
+opencv-python-headless
+numpy

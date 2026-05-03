@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Brain Tumor Detector</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+
+  <div class="container">
+
+    <header>
+      <div class="logo">🧠</div>
+      <h1>Brain Tumor Detector</h1>
+      <p class="subtitle">Analysez une IRM cérébrale grâce à l'intelligence artificielle</p>
+    </header>
+
+    <main>
+
+      <div class="upload-card" id="uploadCard">
+        <div class="drop-zone" id="dropZone">
+          <div class="drop-icon">📁</div>
+          <p class="drop-text">Glissez une image IRM ici</p>
+          <p class="drop-sub">ou</p>
+          <label for="fileInput" class="btn-upload">Choisir un fichier</label>
+          <input type="file" id="fileInput" accept=".jpg,.jpeg,.png" hidden />
+          <p class="drop-format">JPG, JPEG, PNG — max 16MB</p>
+        </div>
+      </div>
+
+      <div class="preview-card" id="previewCard" style="display:none;">
+        <div class="preview-left">
+          <img id="previewImg" src="" alt="IRM chargée" />
+          <button class="btn-change" id="btnChange">Changer l'image</button>
+        </div>
+        <div class="preview-right">
+          <div class="result-box" id="resultBox" style="display:none;">
+            <div class="result-icon" id="resultIcon"></div>
+            <h2 class="result-label" id="resultLabel"></h2>
+            <div class="confidence-bar-container">
+              <div class="confidence-bar" id="confidenceBar"></div>
+            </div>
+            <p class="confidence-text" id="confidenceText"></p>
+            <p class="probability-text" id="probabilityText"></p>
+          </div>
+          <div class="loading" id="loading" style="display:none;">
+            <div class="spinner"></div>
+            <p>Analyse en cours...</p>
+          </div>
+          <div class="idle-msg" id="idleMsg">
+            <p>L'image est prête.<br/>Cliquez sur <strong>Analyser</strong> pour lancer la prédiction.</p>
+          </div>
+          <button class="btn-predict" id="btnPredict">Analyser l'IRM</button>
+        </div>
+      </div>
+
+    </main>
+
+    <footer>
+      <p>Modèle CNN entraîné sur le dataset Brain MRI — Kaggle &nbsp;|&nbsp; TensorFlow / Keras</p>
+    </footer>
+
+  </div>
+
+  <script src="/static/script.js"></script>
+</body>
+</html>
