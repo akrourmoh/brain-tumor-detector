@@ -1,18 +1,20 @@
-# 🧠 Brain Tumor Detection
+# Brain Tumor Detection
 
 An end-to-end deep learning application that detects brain tumors from MRI images using a Convolutional Neural Network (CNN) built with TensorFlow/Keras, deployed as a web application with Flask.
 
 ---
 
-## 🌐 Live Demo
+## Live Demo
 
-> Upload an MRI image and get an instant prediction — tumor or no tumor, with confidence score.
+**[brain-tumor-detector-production.up.railway.app](https://brain-tumor-detector-production.up.railway.app)**
+
+Upload an MRI image and get an instant prediction — tumor or no tumor, with confidence score.
 
 ---
 
-## 📌 Project Overview
+## Project Overview
 
-This project was built to automatically classify brain MRI images as **tumorous** or **non-tumorous** using a CNN trained from scratch.
+This project automatically classifies brain MRI images as tumorous or non-tumorous using a CNN trained from scratch.
 
 The full pipeline includes:
 - Data exploration and class imbalance analysis
@@ -24,7 +26,7 @@ The full pipeline includes:
 
 ---
 
-## 📊 Results
+## Results
 
 | Metric | Score |
 |---|---|
@@ -35,7 +37,7 @@ The full pipeline includes:
 
 ---
 
-## 🗂️ Project Structure
+## Project Structure
 
 ```
 brain-tumor-detection/
@@ -44,7 +46,7 @@ brain-tumor-detection/
 ├── requirements.txt              ← Python dependencies
 │
 ├── models/
-│   └── best_model.keras          ← Trained CNN model
+│   └── best_model.h5             ← Trained CNN model
 │
 ├── templates/
 │   └── index.html                ← Frontend HTML
@@ -62,7 +64,7 @@ brain-tumor-detection/
 
 ---
 
-## 🧬 Dataset
+## Dataset
 
 - **Source:** Kaggle — Brain MRI Images for Brain Tumor Detection
 - **Original size:** 253 images (155 tumor / 98 no tumor)
@@ -71,7 +73,7 @@ brain-tumor-detection/
 
 ---
 
-## 🏗️ Model Architecture
+## Model Architecture
 
 ```
 Input (240×240×3)
@@ -94,7 +96,7 @@ Transfer learning models (ResNet50, VGG16) overfitted on this small dataset. A l
 
 ---
 
-## ⚙️ Preprocessing Pipeline
+## Preprocessing Pipeline
 
 Every MRI image goes through 3 steps before prediction:
 
@@ -104,7 +106,7 @@ Every MRI image goes through 3 steps before prediction:
 
 ---
 
-## 🚀 Run Locally
+## Run Locally
 
 **1. Clone the repository**
 ```bash
@@ -129,7 +131,7 @@ http://localhost:5000
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 | Layer | Technology |
 |---|---|
@@ -137,11 +139,11 @@ http://localhost:5000
 | Image Processing | OpenCV, NumPy |
 | Backend | Flask, Werkzeug |
 | Frontend | HTML5, CSS3, JavaScript |
-| Data Analysis | Pandas, Matplotlib |
+| Deployment | Docker, Railway |
 
 ---
 
-## 👤 Author
+## Author
 
 **Mohammed Akrour**
 - Master's in Biometrics & Intelligent Vision — UPEC Paris-Est Créteil
