@@ -2,13 +2,7 @@
 
 An end-to-end deep learning application that detects brain tumors from MRI images using a Convolutional Neural Network (CNN) built with TensorFlow/Keras, deployed as a web application with Flask.
 
----
-
-## Live Demo
-
-**[brain-tumor-detector-production.up.railway.app](https://brain-tumor-detector-production.up.railway.app)**
-
-Upload an MRI image and get an instant prediction — tumor or no tumor, with confidence score.
+**Live Demo:** [brain-tumor-detector-production.up.railway.app](https://brain-tumor-detector-production.up.railway.app)
 
 ---
 
@@ -19,10 +13,10 @@ This project automatically classifies brain MRI images as tumorous or non-tumoro
 The full pipeline includes:
 - Data exploration and class imbalance analysis
 - Data augmentation (253 → 2065 images)
-- Image preprocessing (ROI extraction, resize, normalization)
+- Image preprocessing: ROI extraction, resize to 240×240, normalization
 - CNN training with Dropout regularization
-- Model evaluation (accuracy, F1-score, confusion matrix)
-- Web application deployment (Flask + HTML/CSS/JavaScript)
+- Model evaluation on 281 held-out test images
+- Web application deployment with Flask, Docker, and Railway
 
 ---
 
@@ -30,46 +24,23 @@ The full pipeline includes:
 
 | Metric | Score |
 |---|---|
-| Accuracy | ~88.7% |
-| F1-score | 0.88 |
-| Precision | ~0.89 |
-| Recall | ~0.87 |
+| Accuracy | 89.3% |
+| F1-score | 0.91 |
+| Precision | 0.89 |
+| Recall | 0.93 |
+| Test set | 281 images |
 
----
+**Metrics overview**
 
-## Project Structure
+![Metrics](results/metrics.png)
 
-```
-brain-tumor-detection/
-│
-├── app.py                        ← Flask backend
-├── requirements.txt              ← Python dependencies
-│
-├── models/
-│   └── best_model.h5             ← Trained CNN model
-│
-├── templates/
-│   └── index.html                ← Frontend HTML
-│
-├── static/
-│   ├── style.css                 ← CSS styling
-│   └── script.js                 ← JavaScript logic
-│
-├── 01_data_exploration.ipynb     ← Dataset analysis
-├── 02_data_augmentation.ipynb    ← Data augmentation pipeline
-├── 03_preprocessing.ipynb        ← ROI extraction + preprocessing
-├── 04_model_training.ipynb       ← CNN architecture + training
-└── 05_evaluation.ipynb           ← Model evaluation + metrics
-```
+**Confusion Matrix**
 
----
+![Confusion Matrix](results/confusion_matrix.png)
 
-## Dataset
+**Sample Predictions**
 
-- **Source:** Kaggle — Brain MRI Images for Brain Tumor Detection
-- **Original size:** 253 images (155 tumor / 98 no tumor)
-- **After augmentation:** 2065 images
-- **Classes:** Binary — `yes` (tumor) / `no` (no tumor)
+![Sample Predictions](results/sample_predictions.png)
 
 ---
 
@@ -91,7 +62,6 @@ Flatten → Dense (32, ReLU) → Dropout (0.5)
 Dense (1, Sigmoid)  →  0 = No Tumor / 1 = Tumor
 ```
 
-**Why a simple CNN?**
 Transfer learning models (ResNet50, VGG16) overfitted on this small dataset. A lightweight custom CNN with Dropout regularization performs better.
 
 ---
@@ -100,34 +70,65 @@ Transfer learning models (ResNet50, VGG16) overfitted on this small dataset. A l
 
 Every MRI image goes through 3 steps before prediction:
 
-1. **ROI Extraction** — detects and crops only the brain region, removing useless black background
+1. **ROI Extraction** — detects and crops only the brain region using contour detection, removing the black background
 2. **Resize** — standardizes all images to 240×240×3
-3. **Normalization** — scales pixel values from [0-255] to [0.0-1.0]
+3. **Normalization** — scales pixel values from [0, 255] to [0.0, 1.0]
+
+---
+
+## Dataset
+
+- **Source:** Kaggle — Brain MRI Images for Brain Tumor Detection
+- **Original size:** 253 images (155 tumor / 98 no tumor)
+- **After augmentation:** 2065 images
+- **Split:** 80% train / 20% test (stratified)
+- **Classes:** Binary — `yes` (tumor) / `no` (no tumor)
+
+---
+
+## Project Structure
+
+```
+brain-tumor-detection/
+│
+├── app.py                        ← Flask backend
+├── requirements.txt              ← Python dependencies
+├── Dockerfile                    ← Docker configuration
+│
+├── models/
+│   └── best_model.h5             ← Trained CNN model
+│
+├── templates/
+│   └── index.html                ← Frontend HTML
+│
+├── static/
+│   ├── style.css
+│   └── script.js
+│
+├── results/
+│   ├── confusion_matrix.png
+│   ├── metrics.png
+│   └── sample_predictions.png
+│
+├── 01_data_exploration.ipynb
+├── 02_data_augmentation.ipynb
+├── 03_preprocessing.ipynb
+├── 04_model_training.ipynb
+└── 05_evaluation.ipynb
+```
 
 ---
 
 ## Run Locally
 
-**1. Clone the repository**
 ```bash
 git clone https://github.com/akrourmoh/brain-tumor-detector.git
 cd brain-tumor-detector
-```
-
-**2. Install dependencies**
-```bash
 pip install -r requirements.txt
-```
-
-**3. Run the app**
-```bash
 python app.py
 ```
 
-**4. Open your browser**
-```
-http://localhost:5000
-```
+Open `http://localhost:5000` in your browser.
 
 ---
 
